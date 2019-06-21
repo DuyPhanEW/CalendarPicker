@@ -21,6 +21,7 @@ describe('CalendarPicker', function() {
 			<CalenderPicker
 				startFromMonday={true}
 				allowRangeSelection={true}
+				isCustomized={false}
 				initialDate={new Date(2017, 11, 31)}
 				minDate={minDate}
 				maxDate={maxDate}
@@ -39,6 +40,7 @@ describe('CalendarPicker', function() {
 		const CalendarPicker = renderer.create(
 			<CalenderPicker
 				allowRangeSelection={true}
+				isCustomized={false}
 				initialDate={new Date(2019, 1, 20)}
 				selectedStartDate={selectedStartDate}
 				selectedEndDate={selectedEndDate}

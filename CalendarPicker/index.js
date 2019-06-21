@@ -133,32 +133,39 @@ export default class CalendarPicker extends Component {
       selectedEndDate
     } = this.state;
 
-    const { allowRangeSelection, onDateChange, enableDateChange } = this.props;
+    const { allowRangeSelection, onDateChange, enableDateChange, isCustomized } = this.props;
 
     if (!enableDateChange) {
       return;
     }
 
     const date = moment({ year: currentYear, month: currentMonth, day });
-
-    if (
-      allowRangeSelection &&
-      selectedStartDate &&
-      date.isSameOrAfter(selectedStartDate) &&
-      !selectedEndDate
-    ) {
+    if (!isCustomized) {
+      if (
+          allowRangeSelection &&
+          selectedStartDate &&
+          date.isSameOrAfter(selectedStartDate) &&
+          !selectedEndDate
+      ) {
+        this.setState({
+          selectedEndDate: date
+        });
+        // propagate to parent date has changed
+        onDateChange(date, Utils.END_DATE);
+      } else {
+        this.setState({
+          selectedStartDate: date,
+          selectedEndDate: null
+        });
+        // propagate to parent date has changed
+        onDateChange(date, Utils.START_DATE);
+      }
+    } else {
       this.setState({
         selectedEndDate: date
       });
       // propagate to parent date has changed
       onDateChange(date, Utils.END_DATE);
-    } else {
-      this.setState({
-        selectedStartDate: date,
-        selectedEndDate: null
-      });
-      // propagate to parent date has changed
-      onDateChange(date, Utils.START_DATE);
     }
   }
 
@@ -242,6 +249,7 @@ export default class CalendarPicker extends Component {
     const {
       allowRangeSelection,
       startFromMonday,
+        isCustomized,
       initialDate,
       minDate,
       maxDate,

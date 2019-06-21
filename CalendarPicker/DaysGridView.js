@@ -35,7 +35,8 @@ export default function DaysGridView(props) {
     disabledDates,
     minRangeDuration,
     maxRangeDuration,
-    enableDateChange
+    enableDateChange,
+      isCustomized
   } = props;
 
   const today = moment();
@@ -175,4 +176,5 @@ DaysGridView.propTypes = {
   disabledDates: PropTypes.array,
   minRangeDuration: PropTypes.oneOfType([PropTypes.array, PropTypes.number]),
   maxRangeDuration: PropTypes.oneOfType([PropTypes.array, PropTypes.number]),
+  isCustomized: PropTypes.bool
 }
